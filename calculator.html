@@ -1,0 +1,108 @@
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="style.css">
+
+    </head>
+    <body>
+        <table border="1">
+            <tr>
+            <td colspan="4">
+                <input type="text" id="inputBox" value="0"/>
+                </td>
+                </tr>
+            <tr>
+                <td class="digitButton" onclick="digitBtnPressed(7)">7</td>
+                <td class="digitButton" onclick="digitBtnPressed(8)">8</td>
+                <td class="digitButton" onclick="digitBtnPressed(9)">9</td>
+                <td class="operatorButton" onclick="operatorBtnPresssed('x')">x</td>
+            </tr>
+
+            <tr>
+                <td class="digitButton" onclick="digitBtnPressed(4)">4</td>
+                <td class="digitButton" onclick="digitBtnPressed(5)">5</td>
+                <td class="digitButton" onclick="digitBtnPressed(6)">6</td>
+                <td class="operatorButton" onclick="operatorBtnPresssed('-')">-</td>
+            </tr>
+            <tr>
+                <td class="digitButton" onclick="digitBtnPressed(1)">1</td>
+                <td class="digitButton" onclick="digitBtnPressed(2)">2</td>
+                <td class="digitButton" onclick="digitBtnPressed(3)">3</td>
+                <td class="operatorButton" onclick="operatorBtnPresssed('+')">+</td>
+            </tr>
+            <tr>
+                <td class="digitButton" colspan="2" onclick="digitBtnPressed(0)">0</td>
+                <td class="ACButton" onclick="ACpressed()">AC</td>
+                <td class="operatorButton" onclick="operatorBtnPresssed('/')">/</td>
+            </tr>
+            <tr>
+                <td colspan="4" class="operatorButton" onclick="equalsBtnPressed()">=</td>
+            </tr>
+
+         </table>
+
+         <script>
+            var newLine= true;  //this is the condition when a user begins to type into the  calculator which gets rid of the zero
+            var currentOperator;
+            var value1;
+
+            
+            //Event Handler for when any digi is pressed
+            function digitBtnPressed(button){
+                if(newLine){
+                    document.getElementById("inputBox").value= button;  //when they start typing the input box is set to the button they would have typed
+                    newLine= false;//after typing the first button, it immediately becomes false
+                }else{
+                    var currentValue = document.getElementById("inputBox").value;
+                    document.getElementById("inputBox").value= currentValue + button; //when var is false there is concatination
+                }
+
+           }
+            //Event Handler for ehn the AC button is pressed
+           function ACpressed(){
+                document.getElementById("inputBox").value= 0 ;
+                newLine = true;
+            }
+
+            function operatorBtnPresssed(operator){
+                currentOperator= operator;
+                value1=Number(document.getElementById("inputBox").value);
+                newLine= true;
+                value2=document.getElementById("inputBox").value;
+            
+            }
+
+            //Event handler for equals button
+            function equalsBtnPressed(){
+                var value2= Number(document.getElementById("inputBox").value);
+                var finalTotal;
+
+                switch(currentOperator){
+                    case"+":
+                        finalTotal = value1 + value2;
+                        break;
+                    case"-":
+                        finalTotal = value1 - value2;
+                        break;
+                    case"/":
+                        finalTotal = value1 / value2;
+                        break;
+                    case"x":
+                        finalTotal = value1 * value2;
+                        break;
+                }
+                document.getElementById("inputBox").value = finalTotal;
+                
+                value1= 0;
+                newLine= true;
+            }
+
+             
+
+
+             
+
+
+
+         </script>
+    </body>
+    </html>
